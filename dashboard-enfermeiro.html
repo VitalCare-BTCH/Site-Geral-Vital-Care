@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VitalCare - Dashboard Enfermeiro</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="scripts.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body data-page-id="dashboard-enfermeiro">
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <h3 style="color: var(--theme-text-primary);">VitalCare</h3>
+            <nav class="nav-links">
+                <a href="#" id="link-dashboard" class="active">DASHBOARD</a>
+                <a href="#" id="link-pacientes">PACIENTES</a>
+                <a href="#" id="link-atendimento">ATENDIMENTO</a>
+            </nav>
+            <div class="sidebar-actions">
+                <a href="unidade-selecao.html" class="btn-back">MUDAR UNIDADE</a>
+                <a href="index.html" class="btn btn-outline">SAIR</a>
+            </div>
+        </aside>
+        <main class="main-content">
+            <h1>Dashboard (<span id="unit-title">...</span>)</h1>
+            <p>Visão geral da sua unidade de trabalho.</p>
+            <div class="dashboard-content-grid">
+                
+                <div class="card text-center">
+                    <h3 data-stat="pendentes" class="unit-stat">0</h3>
+                    <p>Atendimentos Pendentes</p>
+                </div>
+                
+                <div class="card text-center">
+                    <h3 data-stat="tempo-espera" class="unit-stat">0 min</h3>
+                    <p>Tempo Médio de Espera</p>
+                </div>
+                
+                <div class="card text-center">
+                    <h3 data-stat="realizados-dia" class="unit-stat">0</h3>
+                    <p>Atendimentos Realizados (Hoje)</p>
+                </div>
+                
+                <div class="card text-center">
+                    <h3 data-stat="realizados-total" class="unit-stat">0</h3>
+                    <p>Total Geral na Unidade</p>
+                </div>
+                
+            </div>
+            <div class="card mt-lg">
+                <h2>Log de Atividades Recentes</h2>
+                <ul id="log-atividades">
+                    </ul>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

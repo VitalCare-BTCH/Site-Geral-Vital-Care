@@ -1,0 +1,406 @@
+/* ==========================================================================
+   VitalCare - Design System e Estilos Globais
+   - VERSÃO FINAL E COMPLETA (Design Aprimorado)
+   - Contém todas as variáveis de tema, layouts e estilos de componente.
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+    /* Tipografia e Escala de Fonte */
+    --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+    --font-size-base: 1rem;
+    --h1-size: clamp(2.5rem, 6vw, 4rem);
+    --h2-size: clamp(1.75rem, 4vw, 2.75rem);
+    --h3-size: clamp(1.5rem, 3.5vw, 2rem);
+    --h4-size: clamp(1.25rem, 2.5vw, 1.6rem);
+
+    /* Cores Neutras */
+    --color-bg-light: #F4F6F9;
+    --color-bg-dark: #E9ECEF;
+    --color-bg-surface: #FFFFFF;
+    --color-text-primary: #212529;
+    --color-text-secondary: #6C757D;
+    --color-white: #FFFFFF;
+    --color-black: #000000;
+    --color-divider: #DEE2E6;
+
+    /* Sombras (inspiradas em Material Design) */
+    --shadow-1: 0 1px 3px rgba(0, 0, 0, 0.08);
+    --shadow-2: 0 4px 10px rgba(0, 0, 0, 0.1);
+    --shadow-3: 0 8px 24px rgba(0, 0, 0, 0.15);
+    --shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+
+    /* Raio das Bordas */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-pill: 999px;
+
+    /* Espaçamento (escala modular) */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-xxl: 3rem;
+    --space-xxxl: 5rem;
+
+    /* Transições e Animações */
+    --transition-speed: 0.35s;
+    --ease-out-cubic: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+    /* Variáveis de Tema Globais */
+    --color-primary: #5A4CEB; /* Padrão: Roxo */
+    --color-secondary: #8E78FF;
+    --color-gradient: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    --color-bg-page: #e7eaf0; /* Fundo padrão não branco */
+}
+
+body.theme-selection {
+    --color-primary: #5A4CEB;
+    --color-secondary: #8E78FF;
+    --color-bg-page: #e7eaf0;
+    --theme-text-primary: #4B0082;
+}
+
+body.theme-nurse {
+    --color-primary: #008080;
+    --color-secondary: #48D1CC;
+    --color-bg-page: #e0fff9; /* Fundo Turquesa Claro */
+    --theme-text-primary: #004D40;
+}
+
+body.theme-doctor {
+    --color-primary: #00008B;
+    --color-secondary: #1E90FF;
+    --color-bg-page: #e6f0ff; /* Fundo Azul Claro */
+    --theme-text-primary: #001F3F;
+}
+
+/* --------------------------------------------------------------------------
+   Estilos Base e Resets
+   -------------------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+    height: 100%;
+    font-family: var(--font-sans);
+    background-color: var(--color-bg-page);
+    color: var(--color-text-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: var(--space-sm);
+}
+h1 { font-size: var(--h1-size); }
+h2 { font-size: var(--h2-size); }
+h3 { font-size: var(--h3-size); }
+h4 { font-size: var(--h4-size); }
+p {
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-md);
+}
+a {
+    text-decoration: none;
+    color: var(--color-primary);
+    transition: color var(--transition-speed) var(--ease-out-cubic);
+}
+a:hover {
+    color: var(--color-secondary);
+}
+
+/* --------------------------------------------------------------------------
+   Layouts e Utilitários
+   -------------------------------------------------------------------------- */
+
+/* Fundo Gradiente Animado para Telas Iniciais */
+.hero-gradient-bg {
+    background: linear-gradient(135deg, var(--color-primary), #48D1CC, #1E90FF, var(--color-secondary));
+    background-size: 400% 400%;
+    animation: gradientShift 20s ease infinite;
+}
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.full-screen-center {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: var(--space-md);
+}
+
+/* Layout Dashboard */
+.dashboard-layout { display: flex; min-height: 100vh; }
+.main-content {
+    flex-grow: 1;
+    padding: var(--space-xl);
+    background-color: var(--color-bg-page);
+}
+.hidden { display: none !important; }
+
+/* --------------------------------------------------------------------------
+   Sidebar e Navegação (Ajustado para Links e Botões Voltar/Sair)
+   -------------------------------------------------------------------------- */
+.sidebar {
+    width: 280px;
+    background-color: var(--color-bg-surface);
+    box-shadow: var(--shadow-md);
+    padding: var(--space-lg);
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.sidebar h3 { margin-bottom: var(--space-xl); }
+.sidebar .nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    margin-bottom: auto;
+}
+.sidebar .nav-links a {
+    display: block;
+    padding: var(--space-md);
+    font-weight: 500;
+    border-radius: var(--radius-sm);
+    color: var(--color-text-primary);
+    transition: background-color 0.2s;
+    text-transform: uppercase;
+}
+.sidebar .nav-links a.active {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-weight: 600;
+    box-shadow: var(--shadow-sm);
+}
+.sidebar .nav-links a:hover {
+    background-color: var(--color-bg-dark);
+}
+
+/* Ações Inferiores (Voltar e Sair) */
+.sidebar-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+}
+.sidebar-actions .btn-back {
+    display: block;
+    padding: var(--space-md);
+    font-weight: 600;
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-dark);
+    border-radius: var(--radius-sm);
+    text-align: center;
+    text-transform: uppercase;
+    transition: background-color 0.2s;
+}
+.sidebar-actions .btn-back:hover {
+    background-color: var(--color-divider);
+}
+
+/* --------------------------------------------------------------------------
+   Componentes
+   -------------------------------------------------------------------------- */
+
+/* Card (Design Básico) */
+.card {
+    background-color: var(--color-bg-surface);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-1);
+    padding: var(--space-lg);
+    transition: transform var(--transition-speed) var(--ease-out-cubic), box-shadow var(--transition-speed) var(--ease-out-cubic);
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-2);
+}
+
+/* Botões */
+.btn {
+    padding: 0.8rem 1.6rem;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all var(--transition-speed) var(--ease-out-cubic);
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+}
+.btn-primary {
+    background: var(--color-gradient);
+    color: var(--color-white);
+    box-shadow: var(--shadow-2);
+}
+.btn-primary:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+.btn-outline {
+    background-color: transparent;
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
+}
+.btn-outline:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+/* Formulários */
+.form-group {
+    margin-bottom: var(--space-lg);
+}
+.form-label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: var(--space-sm);
+    color: var(--color-text-primary);
+}
+.form-control {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-divider);
+    border-radius: var(--radius-sm);
+    background-color: var(--color-bg-light);
+    font-size: var(--text-md);
+    transition: border-color var(--transition-speed);
+}
+.form-control:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(var(--color-primary), 0.1);
+}
+
+/* Ícones de Perfil e Nome */
+.icon-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    width: 48px;
+    border-radius: 50%;
+    background-color: var(--color-bg-light);
+    color: var(--color-primary);
+    font-size: 24px;
+    box-shadow: var(--shadow-1);
+}
+.selection-card-content {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    text-align: left;
+    padding: var(--space-md);
+}
+.patient-name-container {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+.patient-name-container i {
+    font-size: 16px;
+    color: var(--color-secondary);
+}
+
+/* Layouts de Tabela e Grid */
+.dashboard-content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-lg);
+    margin-top: var(--space-xl);
+}
+.table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    margin-top: var(--space-md);
+}
+.table thead th {
+    background-color: var(--color-bg-dark);
+    text-align: left;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    padding: var(--space-md) var(--space-lg);
+    text-transform: uppercase;
+    font-size: var(--text-sm);
+    letter-spacing: 0.05rem;
+}
+.table tbody tr {
+    background-color: var(--color-bg-surface);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-speed);
+}
+.table tbody td {
+    padding: var(--space-md) var(--space-lg);
+    border-bottom: 1px solid var(--color-divider);
+}
+.table tbody tr:hover {
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-2px);
+}
+
+/* Alertas, Modais e Badges */
+.alert {
+    padding: var(--space-md);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-sm);
+    text-align: center;
+    border: 1px solid transparent;
+}
+.alert-danger { background-color: #FEE2E2; color: #991B1B; border-color: #FCA5A5; }
+.alert-success { background-color: #D1FAE5; color: #065F46; border-color: #A7F3D0; }
+.badge-info { background-color: #DBEAFE; color: #1E40AF; }
+.badge-success { background-color: #D1FAE5; color: #065F46; }
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.modal-content {
+    background-color: var(--color-bg-surface);
+    padding: var(--space-lg) var(--space-xl);
+    border-radius: var(--radius-md);
+    max-width: 600px;
+    width: 90%;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    transform: scale(0.95);
+    transition: transform var(--transition-speed) var(--ease-out-cubic);
+}
+.modal-close {
+    position: absolute;
+    top: var(--space-lg);
+    right: var(--space-lg);
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--color-text-secondary);
+    transition: color var(--transition-speed);
+}
+.modal-close:hover {
+    color: var(--color-text-primary);
+}
+
+/* AÇÃO FINAL QUE GARANTE O FECHAMENTO - Deve ser a última regra de ocultamento */
+.hidden {
+    display: none !important;
+}
