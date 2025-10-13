@@ -117,6 +117,14 @@ a:hover {
    -------------------------------------------------------------------------- */
 
 /* Fundo Gradiente Animado para Telas Iniciais */
+
+.p-style{
+    color:#ffffff
+} /*cor subtitulo*/
+
+.h1-style{
+    color: #ffffff;
+} /*cor titulo página*/
 .hero-gradient-bg {
     background: linear-gradient(135deg, var(--color-primary), #48D1CC, #1E90FF, var(--color-secondary));
     background-size: 400% 400%;
@@ -137,13 +145,21 @@ a:hover {
     padding: var(--space-md);
 }
 
-/* Layout Dashboard */
+/* Layout Dashboard Médicos */
 .dashboard-layout { display: flex; min-height: 100vh; }
 .main-content {
     flex-grow: 1;
     padding: var(--space-xl);
-    background-color: var(--color-bg-page);
+    background: linear-gradient(135deg, var(--color-primary), #48D1CC, #1E90FF, var(--color-secondary)); /*fundo  gradiente médicos*/
 }
+
+.dashboardenfermeiros-layout { display: flex; min-height: 100vh; }
+.main-content {
+    flex-grow: 1;
+    padding: var(--space-xl);
+    background: linear-gradient(135deg, var(--color-primary), #008080, #48D1CC, var(--color-secondary)); /*fundo  gradiente médicos*/
+}
+
 .hidden { display: none !important; }
 
 /* --------------------------------------------------------------------------
