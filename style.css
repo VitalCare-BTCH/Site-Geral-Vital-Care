@@ -9,6 +9,8 @@
     /* Tipografia e Escala de Fonte */
     --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
     --font-size-base: 1rem;
+    --font-size-sm: 0.875rem;
+    --font-size-md: 1rem;
     --h1-size: clamp(2.5rem, 6vw, 4rem);
     --h2-size: clamp(1.75rem, 4vw, 2.75rem);
     --h3-size: clamp(1.5rem, 3.5vw, 2rem);
@@ -26,8 +28,11 @@
 
     /* Sombras (inspiradas em Material Design) */
     --shadow-1: 0 1px 3px rgba(0, 0, 0, 0.08);
+    --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.06);
     --shadow-2: 0 4px 10px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 6px 18px rgba(0, 0, 0, 0.12);
     --shadow-3: 0 8px 24px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.18);
     --shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.06);
 
     /* Raio das Bordas */
@@ -50,14 +55,18 @@
     --ease-out-cubic: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
     /* Variáveis de Tema Globais */
-    --color-primary: #5A4CEB; /* Padrão: Roxo */
+    --color-primary: #5A4CEB;
+    /* RGB correspondente para usar em rgba() onde necessário */
+    --color-primary-rgb: 90,76,235;
     --color-secondary: #8E78FF;
     --color-gradient: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-    --color-bg-page: #e7eaf0; /* Fundo padrão não branco */
+    --color-bg-page: #e7eaf0;
 }
 
+/* Temas específicos (podem sobrescrever variáveis acima) */
 body.theme-selection {
     --color-primary: #5A4CEB;
+    --color-primary-rgb: 90,76,235;
     --color-secondary: #8E78FF;
     --color-bg-page: #e7eaf0;
     --theme-text-primary: #4B0082;
@@ -65,22 +74,31 @@ body.theme-selection {
 
 body.theme-nurse {
     --color-primary: #008080;
+    --color-primary-rgb: 0,128,128;
     --color-secondary: #48D1CC;
-    --color-bg-page: #e0fff9; /* Fundo Turquesa Claro */
+    --color-bg-page: #e0fff9;
     --theme-text-primary: #004D40;
 }
 
 body.theme-doctor {
     --color-primary: #00008B;
+    --color-primary-rgb: 0,0,139;
     --color-secondary: #1E90FF;
-    --color-bg-page: #e6f0ff; /* Fundo Azul Claro */
+    --color-bg-page: #e6f0ff;
     --theme-text-primary: #001F3F;
 }
 
 /* --------------------------------------------------------------------------
    Estilos Base e Resets
    -------------------------------------------------------------------------- */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 html, body {
     height: 100%;
     font-family: var(--font-sans);
@@ -90,19 +108,23 @@ html, body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
 h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: var(--space-sm);
 }
+
 h1 { font-size: var(--h1-size); }
 h2 { font-size: var(--h2-size); }
 h3 { font-size: var(--h3-size); }
 h4 { font-size: var(--h4-size); }
+
 p {
     color: var(--color-text-secondary);
     margin-bottom: var(--space-md);
 }
+
 a {
     text-decoration: none;
     color: var(--color-primary);
@@ -117,22 +139,22 @@ a:hover {
    -------------------------------------------------------------------------- */
 
 /* Fundo Gradiente Animado para Telas Iniciais */
-
-.p-style{
-    color:#ffffff
-} /*cor subtitulo*/
-
-.h1-style{
+.p-style {
     color: #ffffff;
-} /*cor titulo página*/
+}
+
+.h1-style {
+    color: #ffffff;
+}
+
 .hero-gradient-bg {
     background: linear-gradient(135deg, var(--color-primary), #48D1CC, #1E90FF, var(--color-secondary));
     background-size: 400% 400%;
     animation: gradientShift 20s ease infinite;
 }
 @keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
@@ -145,19 +167,14 @@ a:hover {
     padding: var(--space-md);
 }
 
-/* Layout Dashboard Médicos */
+/* Layout Dashboard Geral */
 .dashboard-layout { display: flex; min-height: 100vh; }
 .main-content {
     flex-grow: 1;
     padding: var(--space-xl);
-    background: linear-gradient(135deg, var(--color-primary), #48D1CC, #1E90FF, var(--color-secondary)); /*fundo  gradiente médicos*/
-}
-
-.dashboardenfermeiros-layout { display: flex; min-height: 100vh; }
-.main-content {
-    flex-grow: 1;
-    padding: var(--space-xl);
-    background: linear-gradient(135deg, var(--color-primary), #008080, #48D1CC, var(--color-secondary)); /*fundo  gradiente médicos*/
+    background: linear-gradient(135deg, var(--color-primary), #48D1CC, #1E90FF, var(--color-secondary)); /* fundo gradiente padrão */
+    background-size: 400% 400%;
+    animation: gradientShift 20s ease infinite;
 }
 
 .hidden { display: none !important; }
@@ -288,13 +305,14 @@ a:hover {
     border: 1px solid var(--color-divider);
     border-radius: var(--radius-sm);
     background-color: var(--color-bg-light);
-    font-size: var(--text-md);
-    transition: border-color var(--transition-speed);
+    font-size: var(--font-size-md);
+    transition: border-color 0.2s;
+    /* foco com sombra leve usando variável rgb da cor primária */
 }
 .form-control:focus {
     outline: none;
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(var(--color-primary), 0.1);
+    box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.08);
 }
 
 /* Ícones de Perfil e Nome */
@@ -349,13 +367,13 @@ a:hover {
     color: var(--color-text-primary);
     padding: var(--space-md) var(--space-lg);
     text-transform: uppercase;
-    font-size: var(--text-sm);
+    font-size: var(--font-size-sm);
     letter-spacing: 0.05rem;
 }
 .table tbody tr {
     background-color: var(--color-bg-surface);
     border-radius: var(--radius-md);
-    transition: all var(--transition-speed);
+    transition: all 0.2s;
 }
 .table tbody td {
     padding: var(--space-md) var(--space-lg);
@@ -370,7 +388,7 @@ a:hover {
 .alert {
     padding: var(--space-md);
     border-radius: var(--radius-sm);
-    font-size: var(--text-sm);
+    font-size: var(--font-size-sm);
     text-align: center;
     border: 1px solid transparent;
 }
@@ -401,7 +419,11 @@ a:hover {
     box-shadow: var(--shadow-lg);
     position: relative;
     transform: scale(0.95);
-    transition: transform var(--transition-speed) var(--ease-out-cubic);
+    transition: transform 0.35s var(--ease-out-cubic);
+
+    /* --- INSERÇÃO PARA SCROLL E TAMANHO (CORREÇÃO) --- */
+    max-height: 90vh;
+    overflow-y: auto;
 }
 .modal-close {
     position: absolute;
@@ -410,13 +432,68 @@ a:hover {
     font-size: 2rem;
     cursor: pointer;
     color: var(--color-text-secondary);
-    transition: color var(--transition-speed);
+    transition: color 0.2s;
 }
 .modal-close:hover {
     color: var(--color-text-primary);
 }
 
-/* AÇÃO FINAL QUE GARANTE O FECHAMENTO - Deve ser a última regra de ocultamento */
-.hidden {
-    display: none !important;
+/* --------------------------------------------------------------------------
+   Estilos Específicos do Prontuário (Correção de Layout)
+   -------------------------------------------------------------------------- */
+#prontuario-content {
+    margin-top: var(--space-md);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-divider);
+    margin-bottom: var(--space-lg);
+}
+
+.prontuario-section {
+    margin-bottom: var(--space-md);
+    padding: var(--space-sm) 0;
+}
+
+.prontuario-section h3 {
+    /* Usa a cor primária do tema do dashboard atual */
+    color: var(--color-primary);
+    border-bottom: 2px solid var(--color-divider);
+    padding-bottom: var(--space-xs);
+    margin-top: var(--space-md);
+    margin-bottom: var(--space-sm);
+    font-size: var(--h4-size);
+}
+
+.prontuario-section p {
+    /* Ajusta a cor para o texto principal, melhorando a visibilidade */
+    color: var(--color-text-primary);
+    margin: 5px 0;
+    font-size: 0.95rem;
+}
+
+.prontuario-section p strong {
+    font-weight: 600;
+}
+
+.prontuario-section ul {
+    list-style: disc;
+    padding-left: var(--space-lg);
+    margin: var(--space-sm) 0;
+    color: var(--color-text-primary);
+}
+
+.prontuario-section ul li {
+    margin-bottom: 3px;
+    color: var(--color-text-secondary);
+}
+
+/* Pequenas correções e helpers adicionais */
+.text-center { text-align: center; }
+.row { display: flex; gap: var(--space-md); align-items: center; }
+.column { display: flex; flex-direction: column; gap: var(--space-sm); }
+
+/* Media queries básicas */
+@media (max-width: 900px) {
+    .sidebar { display: none; }
+    .dashboard-layout { flex-direction: column; }
+    .main-content { padding: var(--space-md); }
 }
